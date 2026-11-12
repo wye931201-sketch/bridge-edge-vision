@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
+  "stats": {
+    "train": {
+      "images": 766,
+      "negative_images": 157,
+      "boxes": 2823,
+      "per_class": {
+        "spalling": 963,
+        "exposed_rebar": 208,
+        "rust": 1219,
+        "rockpocket": 76,
+        "crack": 357
+      }
+    },
+    "val": {
+      "images": 160,
+      "negative_images": 28,
+      "boxes": 723,
+      "per_class": {
+        "spalling": 276,
+        "rust": 308,
+        "crack": 78,
+        "rockpocket": 16,
+        "exposed_rebar": 45
+      }
+    }
+  },
+  "quarantined": [
+    {
+      "source_path": "data/data_48/dacl10k_v2_train_3524.jpg",
+      "reason": "non_identity_exif_orientation",
+      "orientation": 6,
+      "detail": "Annotation coordinate frame requires confirmation; do not guess a box rotation"
+    },
+    {
+      "source_path": "data/data_57/dacl10k_v2_train_3558.jpg",
+      "reason": "non_identity_exif_orientation",
+      "orientation": 6,
+      "detail": "Annotation coordinate frame requires confirmation; do not guess a box rotation"
+    }
+  ],
+  "source": {
+    "dataset": "dacl10k-v2",
+    "upstream_repository": "https://github.com/phiyodr/dacl10k-toolkit",
+    "paper": "https://openaccess.thecvf.com/content/WACV2024/html/Flotzinger_dacl10k_Benchmark_for_Semantic_Bridge_Damage_Segmentation_WACV_2024_paper.html",
+    "mirror": "Voxel51/dacl10k",
+    "revision": "7aa4a3e6fd8818d94bdf51b9d02ea0443808f68b",
+    "samples_sha256": "329e842ee83c700c3717b629ea199faa7a9d3451b2d5fff5923b5f44e8abc588",
+    "effective_data_license": "CC-BY-NC-4.0",
+    "license_note": "Upstream toolkit and mirror metadata.json say BY-NC. The mirror README says BY-4.0. This project follows the more restrictive upstream license; raw data are not redistributed."
+  },
+  "seed": 2026,
+  "selection": "SHA256-ranked filenames within original splits",
+  "limits": [
+    "Perceptual similarity is a review hint, not confirmed duplication",
+    "Bridge-identity and capture-session separation are not established by image hashes",
+    "This audit does not manually certify annotation correctness"
+  ]
+}

@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bridge-edge-vision"
+version = "0.1.0"
+description = "Offline bridge surface-defect detection, reproducible experiments and edge deployment"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "AGPL-3.0-only"
+authors = [{name = "wye931201-sketch"}]
+dependencies = [
+  "torch==2.9.1", "torchvision==0.24.1", "ultralytics==8.4.210", "timm==1.0.31",
+  "numpy<3", "pillow", "opencv-python==5.0.0.93", "pyyaml", "httpx",
+  "onnx==1.23.2", "onnxruntime==1.31.1", "onnxscript", "fastapi", "uvicorn",
+]
+
+[project.scripts]
+bridge-edge = "bridge_edge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bridge_edge = ["web/*.html", "web/*.css", "web/*.js"]
+
+[tool.setuptools.data-files]
+"share/bridge-edge-vision/configs" = ["configs/*.json"]
+"share/bridge-edge-vision/configs/models" = ["configs/models/*.yaml"]
+"share/bridge-edge-vision/configs/experiments" = ["configs/experiments/*.yaml"]
+
+[tool.uv]
+environments = ["sys_platform == 'win32' or sys_platform == 'linux'"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

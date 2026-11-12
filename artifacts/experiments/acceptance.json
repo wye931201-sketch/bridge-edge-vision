@@ -1,0 +1,124 @@
+{
+  "created_utc": "2026-11-12T10:04:10.263389+00:00",
+  "passed": true,
+  "weights": "pilot-yolov8n-s2026-r9.pt",
+  "weights_sha256": "8dd346ccb3720053d317f134c6a51c9eb062619022dfd535a1e69a8b35a42d65",
+  "dataset_manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
+  "http_prediction_history_and_downloads": true,
+  "invalid_image_returns_400": true,
+  "unicode_filename_verified": true,
+  "tile_count": 9,
+  "parity": [
+    {
+      "image": "dacl10k_v2_validation_0003.jpg",
+      "passed": true,
+      "pytorch_detections": 1,
+      "onnx_detections": 1,
+      "matched": 1,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0009.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0013.jpg",
+      "passed": true,
+      "pytorch_detections": 1,
+      "onnx_detections": 1,
+      "matched": 1,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0022.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0024.jpg",
+      "passed": true,
+      "pytorch_detections": 1,
+      "onnx_detections": 1,
+      "matched": 1,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0025.jpg",
+      "passed": true,
+      "pytorch_detections": 0,
+      "onnx_detections": 0,
+      "matched": 0,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0034.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0038.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0045.jpg",
+      "passed": true,
+      "pytorch_detections": 0,
+      "onnx_detections": 0,
+      "matched": 0,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0047.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0056.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    },
+    {
+      "image": "dacl10k_v2_validation_0063.jpg",
+      "passed": true,
+      "pytorch_detections": 2,
+      "onnx_detections": 2,
+      "matched": 2,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    }
+  ],
+  "pytorch_detection_total": 17,
+  "sample_policy": "first 12 fixed validation filenames; confidence 0.15; no result-based selection",
+  "web_visual_inspection_performed": false
+}

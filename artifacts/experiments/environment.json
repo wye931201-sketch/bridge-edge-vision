@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-11-12T13:12:36.549711+00:00",
+  "python": "3.12.16",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "packages": {
+    "torch": "2.9.1+cpu",
+    "torchvision": "0.24.1+cpu",
+    "ultralytics": "8.4.210",
+    "timm": "1.0.31",
+    "numpy": "2.5.4",
+    "pillow": "13.0.0",
+    "opencv-python": "5.0.0.93",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.1",
+    "fastapi": "0.162.5",
+    "uvicorn": "0.54.0",
+    "httpx": "0.28.1",
+    "pyyaml": "6.0.3"
+  },
+  "selected_profile": "CPU training and local ONNX CPU deployment",
+  "cuda_long_training_verified": false
+}

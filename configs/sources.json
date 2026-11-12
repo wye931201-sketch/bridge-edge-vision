@@ -1,0 +1,10 @@
+{
+  "dataset": "dacl10k-v2",
+  "upstream_repository": "https://github.com/phiyodr/dacl10k-toolkit",
+  "paper": "https://openaccess.thecvf.com/content/WACV2024/html/Flotzinger_dacl10k_Benchmark_for_Semantic_Bridge_Damage_Segmentation_WACV_2024_paper.html",
+  "mirror": "Voxel51/dacl10k",
+  "revision": "7aa4a3e6fd8818d94bdf51b9d02ea0443808f68b",
+  "samples_sha256": "329e842ee83c700c3717b629ea199faa7a9d3451b2d5fff5923b5f44e8abc588",
+  "effective_data_license": "CC-BY-NC-4.0",
+  "license_note": "Upstream toolkit and mirror metadata.json say BY-NC. The mirror README says BY-4.0. This project follows the more restrictive upstream license; raw data are not redistributed."
+}

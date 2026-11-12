@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this research software, cite it and the original dataset/backbone papers."
+type: software
+title: "Bridge Edge Vision: Offline Bridge Surface Defect Detection"
+version: 0.1.0
+date-released: 2026-11-12
+license: AGPL-3.0-only
+authors:
+  - name: "wye931201-sketch"
+repository-code: "https://github.com/wye931201-sketch/bridge-edge-vision"

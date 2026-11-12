@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-11-12T09:24:04.075846+00:00",
+  "dataset_manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
+  "pairs": [
+    {
+      "train": "images/train/dacl10k_v2_train_1292.jpg",
+      "val": "images/val/dacl10k_v2_validation_0181.jpg",
+      "dhash_distance": 2,
+      "status": "manual_review_candidate",
+      "review": "assistant_visual_review",
+      "disposition": "not_confirmed_near_duplicate",
+      "reason": "Different surfaces: a damaged open ceiling seam versus a smooth wall with metal joint; no matching local texture.",
+      "train_sha256": "c798e627c3b1ffaab0ffdf64713c7edce2bf24c205d2a889740abd2549264570",
+      "val_sha256": "d4a04501d6858072ba86f468ebb25052fcff932aa895080201d0d81fdd76f575"
+    },
+    {
+      "train": "images/train/dacl10k_v2_train_1316.jpg",
+      "val": "images/val/dacl10k_v2_validation_0025.jpg",
+      "dhash_distance": 2,
+      "status": "manual_review_candidate",
+      "review": "assistant_visual_review",
+      "disposition": "not_confirmed_near_duplicate",
+      "reason": "Different scenes: a corner and ceiling with green markings versus a cracked pier next to a grid opening.",
+      "train_sha256": "f245a8794c1f3b9e826ddda09c36999939b0c3281976fc40ab59381e749476ef",
+      "val_sha256": "6099fb928cd2c81c1f4ec1fe7941d85270474e1640b5806e3458d881bc0466b7"
+    },
+    {
+      "train": "images/train/dacl10k_v2_train_5253.jpg",
+      "val": "images/val/dacl10k_v2_validation_0751.jpg",
+      "dhash_distance": 2,
+      "status": "manual_review_candidate",
+      "review": "assistant_visual_review",
+      "disposition": "not_confirmed_near_duplicate",
+      "reason": "Different scenes: a beam soffit with horizontal repair and date stamp versus a wall with red arrow at a circular patch.",
+      "train_sha256": "49a48f94b3b85c91f67f8d89e3943bfd8471a733a85b8e3b894d9e53e7cbd6e7",
+      "val_sha256": "c9c14d58d373243861e1d75c07d9bbc5792a72552a25b8243db029f842689e1c"
+    }
+  ],
+  "limits": "Visual review is limited to these three hash candidates; bridge identity and capture-session independence remain unknown. Not human-certified annotation review."
+}

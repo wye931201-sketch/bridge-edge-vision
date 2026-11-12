@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-11-12T08:56:50.778999+00:00",
+  "weights": [
+    {
+      "name": "yolov8n",
+      "repository": "Ultralytics/YOLOv8",
+      "revision": "27f858f2dc238503a66ce10248cf7ec71a3ded5d",
+      "upstream_sha256": "31e20dde3def09e2cf938c7be6fe23d9150bbbe503982af13345706515f2ef95",
+      "local_sha256": "31e20dde3def09e2cf938c7be6fe23d9150bbbe503982af13345706515f2ef95",
+      "target": "yolov8n.pt",
+      "local_tensors_equal_upstream": null
+    },
+    {
+      "name": "repvit",
+      "repository": "timm/repvit_m0_9.dist_300e_in1k",
+      "revision": "4985922f3d3ed4f3ad803a5f3c20701012da6904",
+      "upstream_sha256": "62634d8233bb5df01dc4a068ddaa02d5ef715ebb55a71f0711b256078d2eb93a",
+      "local_sha256": "f0e217723db87e7fb04ddaba8f87d0742166c693c957a83b67de86ae123ad20c",
+      "target": "repvit_m0_9_imagenet.pth",
+      "local_tensors_equal_upstream": true
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>桥观 · Bridge Edge Vision</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body>
+<aside class="rail"><a class="brand" href="/">B<span>·</span></a><div class="rail-label">BRIDGE<br>EDGE<br>VISION</div><div class="rail-bottom">LOCAL<br>INSPECTION</div></aside>
+<main>
+  <header><div class="breadcrumb">工作空间 <span>/</span> 表观病害检测</div><div class="connection"><i></i><span id="connection">正在连接本地引擎</span></div></header>
+  <section class="intro"><div><div class="eyebrow">VISUAL INSPECTION / 01</div><h1>让桥梁表面的细节，<br>成为可复核的检测记录。</h1><p>上传巡检图片，定位裂缝、剥落、露筋、锈蚀与蜂窝麻面。</p></div><div class="intro-mark"><span>桥观</span><small>Bridge Edge Vision</small></div></section>
+  <div class="workspace">
+    <section class="stage panel"><div class="panel-heading"><span><b class="number">01</b> 图像工作台</span><span class="muted" id="filename">等待选择图片</span></div>
+      <label class="dropzone" id="dropzone" for="file"><div class="upload-icon">↥</div><h2>拖入图片，或点击选择</h2><p>JPG / PNG / WEBP · 最大 25 MiB</p><span class="button secondary">选择本机图片</span></label>
+      <div class="image-wrap hidden" id="image-wrap"><img id="preview" alt="待检测的巡检图像"><span class="image-label" id="image-label">原始图片</span></div>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp" hidden>
+      <div class="stage-footer"><span id="dimensions">图像在本机处理</span><button class="link hidden" id="replace">更换图片</button></div>
+      <div class="sample-heading">没有图片？使用固定验证集样例 <span>非按识别效果挑选</span></div><div id="samples" class="samples"></div>
+    </section>
+    <aside class="controls">
+      <section class="panel settings"><div class="panel-heading"><span><b class="number">02</b> 检测设置</span><span class="pill">本地运行</span></div>
+        <label class="field-label" for="model">检测模型</label><select id="model"><option>正在读取模型</option></select><p class="help" id="model-note">初次加载模型可能需要几秒。</p>
+        <div class="threshold-label"><label class="field-label" for="confidence">置信度阈值</label><strong id="confidence-value">0.25</strong></div><input type="range" id="confidence" min="0.05" max="0.85" step="0.05" value="0.25"><div class="range-hints"><span>保留更多候选</span><span>减少低分候选</span></div>
+        <label class="toggle"><input type="checkbox" id="tile"><span><b>高分辨率切片</b><small>适合局部细小缺陷，处理耗时会增加</small></span></label>
+        <button class="button primary" id="detect" disabled><span>开始检测</span><span>→</span></button><div role="alert" id="error" class="error hidden"></div>
+      </section>
+      <section class="panel result"><div class="panel-heading"><span><b class="number">03</b> 检测结果</span><span id="result-status" class="muted">待运行</span></div><div class="empty" id="empty-result">检测完成后，这里会显示类别、<br>位置与置信度。</div><div id="result-body" class="hidden"><div class="metrics"><div><strong id="finding-count">0</strong><small>个缺陷候选</small></div><div><strong id="latency">—</strong><small>ms · 检测流程耗时</small></div></div><div id="findings"></div><div class="downloads"><a id="download-image" class="button secondary" download>标注图片 ↗</a><a id="download-json" class="button secondary" download>JSON 记录 ↗</a></div></div></section>
+    </aside>
+  </div>
+  <section class="history panel"><div class="panel-heading"><span>最近检测记录</span><button id="refresh-history" class="link">刷新</button></div><div id="history" class="history-grid"><p class="muted">尚无检测记录</p></div></section>
+  <footer><span>Bridge Edge Vision <b>v0.1</b></span><span>输出为表观缺陷线索；毫米尺寸测量需要尺度标定，结构风险判断需要进一步复核。</span></footer>
+</main><script src="/assets/app.js"></script>
+</body></html>
