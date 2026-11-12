@@ -4,6 +4,7 @@ let selectedFile = null, previewUrl = null, busy = false, modelReady = false, cl
 function error(message) { $("error").textContent = message; $("error").classList.toggle("hidden", !message); }
 function syncButton() { $("detect").disabled = busy || !selectedFile || !modelReady; }
 function chooseFile(file) {
+  if (busy) return;
   if (!file) return;
   if (!/^image\/(jpeg|png|webp)$/.test(file.type)) { error("请选择 JPG、PNG 或 WEBP 图片。"); return; }
   if (file.size > 25 * 1024 * 1024) { error("图片超过 25 MiB，请先缩小图片。"); return; }
@@ -69,7 +70,7 @@ async function loadHistory() {
       if (busy) return;
       try {
         showResult(await jsonRequest(`/api/history/${item.id}`));
-        selectedFile = null; $("replace").classList.remove("hidden"); syncButton();
+        selectedFile = null; $("file").value = ""; $("replace").classList.remove("hidden"); syncButton();
       } catch (failure) { error(failure.message); }
     }); $("history").append(button);
   }
@@ -87,7 +88,7 @@ async function start() {
   const sampleData = await jsonRequest("/api/samples");
   for (const sample of sampleData.samples) {
     const button = document.createElement("button"), image = document.createElement("img"); button.className = "sample"; button.title = sample.id; image.alt = "验证集原始样例"; image.src = sample.url; image.loading = "lazy"; button.append(image);
-    button.addEventListener("click", async () => { try { const response = await fetch(sample.url); chooseFile(new File([await response.blob()], sample.id, {type: "image/jpeg"})); } catch (failure) { error(failure.message); } }); $("samples").append(button);
+    button.addEventListener("click", async () => { if (busy) return; try { const response = await fetch(sample.url); chooseFile(new File([await response.blob()], sample.id, {type: "image/jpeg"})); } catch (failure) { error(failure.message); } }); $("samples").append(button);
   }
   await loadHistory();
 }

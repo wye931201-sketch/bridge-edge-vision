@@ -1,0 +1,458 @@
+{
+  "created_utc": "2026-11-12T14:16:46.487310+00:00",
+  "scope": "single-seed pilot, 766 train / 160 validation images after quarantine",
+  "independent_test_evaluated": false,
+  "dataset": {
+    "manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
+    "audit_passed": true,
+    "stats": {
+      "train": {
+        "images": 766,
+        "negative_images": 157,
+        "boxes": 2823,
+        "per_class": {
+          "spalling": 963,
+          "exposed_rebar": 208,
+          "rust": 1219,
+          "rockpocket": 76,
+          "crack": 357
+        }
+      },
+      "val": {
+        "images": 160,
+        "negative_images": 28,
+        "boxes": 723,
+        "per_class": {
+          "spalling": 276,
+          "rust": 308,
+          "crack": 78,
+          "rockpocket": 16,
+          "exposed_rebar": 45
+        }
+      }
+    },
+    "perceptual_review_candidates": 3
+  },
+  "experiments": [
+    {
+      "run": "pilot-yolov8n-s2026-r9",
+      "architecture": "yolov8n",
+      "epochs": 15,
+      "image_size": 384,
+      "seed": 2026,
+      "parameters": 3138975,
+      "training_seconds": 1120.223,
+      "execution": {
+        "completed_epochs": 15,
+        "batches": 1440
+      },
+      "metrics": {
+        "aggregate": {
+          "metrics/precision(B)": 0.14198491506458497,
+          "metrics/recall(B)": 0.10530368182542094,
+          "metrics/mAP50(B)": 0.07934110650062069,
+          "metrics/mAP50-95(B)": 0.03194010229732907,
+          "fitness": 0.03194010229732907
+        },
+        "per_class_with_ground_truth": [
+          {
+            "class_id": 0,
+            "precision": 0.0535901289378402,
+            "recall": 0.07692307692307693,
+            "AP50": 0.02503172573120118,
+            "AP50_95": 0.0050407002121992265
+          },
+          {
+            "class_id": 1,
+            "precision": 0.18164278832365377,
+            "recall": 0.12318840579710146,
+            "AP50": 0.06934443465360002,
+            "AP50_95": 0.026860491212387132
+          },
+          {
+            "class_id": 2,
+            "precision": 0.1760255124465402,
+            "recall": 0.06666666666666667,
+            "AP50": 0.1085851672942398,
+            "AP50_95": 0.04708701436026071
+          },
+          {
+            "class_id": 3,
+            "precision": 0.29866614561489074,
+            "recall": 0.2597402597402597,
+            "AP50": 0.18230775642307356,
+            "AP50_95": 0.07626855025672444
+          },
+          {
+            "class_id": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "AP50": 0.01143644840098889,
+            "AP50_95": 0.004443755445073824
+          }
+        ],
+        "timings_ms": {
+          "preprocess": 0.1083943749563332,
+          "inference": 10.451556875113965,
+          "loss": 7.75000899011502e-05,
+          "postprocess": 1.075137500083656
+        }
+      },
+      "initialization": {
+        "pretrained": true,
+        "variant": "yolov8n",
+        "initial_weights_sha256": "31e20dde3def09e2cf938c7be6fe23d9150bbbe503982af13345706515f2ef95",
+        "trainer_initial_weights_verified": true
+      },
+      "weights": {
+        "filename": "pilot-yolov8n-s2026-r9.pt",
+        "sha256": "8dd346ccb3720053d317f134c6a51c9eb062619022dfd535a1e69a8b35a42d65",
+        "bytes": 6465514
+      },
+      "hardware": {
+        "torch": "2.9.1+cpu",
+        "cuda": null,
+        "gpu": null,
+        "cudnn": null,
+        "cudnn_enabled": false,
+        "cuda_launch_blocking": "1"
+      },
+      "data_transfer": {
+        "pin_memory": false,
+        "non_blocking": false
+      },
+      "optimizer_implementation": "AdamW fused=False foreach=False; finite gradient norm required",
+      "configuration": {
+        "variant": "yolov8n",
+        "dataset_profile": "pilot",
+        "epochs": 15,
+        "imgsz": 384,
+        "batch": 8,
+        "device": "cpu",
+        "workers": 0,
+        "cpu_threads": 4,
+        "seed": 2026,
+        "pretrained": true,
+        "lr0": 0.001,
+        "weight_decay": 0.0005,
+        "mosaic": 0.5,
+        "warmup_bias_lr": 0.0,
+        "optimizer_implementation": "scalar_adamw",
+        "cudnn_enabled": false,
+        "pin_memory": false,
+        "non_blocking_transfer": false,
+        "cuda_launch_blocking": true
+      },
+      "training_code_sha256": "c7370e19aedfd4ca1244ec77d4c2a4c36439e40f889a4ebf6d4fe2c9922ed914",
+      "configuration_sha256": "b6dd7ccc1c07034f409677188fca03b6ca8b6478a91fe9052a22986f7c0e98bb",
+      "evaluation_scope": "source validation subset; not independent test or challenge score",
+      "local_base_revision_at_start": "88f3009b85dace76a9cfef5b90b8b26621d2fba6"
+    },
+    {
+      "run": "pilot-repvit-s2026-r5",
+      "architecture": "repvit",
+      "epochs": 15,
+      "image_size": 384,
+      "seed": 2026,
+      "parameters": 8648159,
+      "training_seconds": 12436.925,
+      "execution": {
+        "completed_epochs": 15,
+        "batches": 1440
+      },
+      "metrics": {
+        "aggregate": {
+          "metrics/precision(B)": 0.19038448644462821,
+          "metrics/recall(B)": 0.06928492424495995,
+          "metrics/mAP50(B)": 0.03814672650668251,
+          "metrics/mAP50-95(B)": 0.010111368782973564,
+          "fitness": 0.010111368782973564
+        },
+        "per_class_with_ground_truth": [
+          {
+            "class_id": 0,
+            "precision": 0.04273033455178199,
+            "recall": 0.038461538461538464,
+            "AP50": 0.007901110569495915,
+            "AP50_95": 0.0021839209773308896
+          },
+          {
+            "class_id": 1,
+            "precision": 0.10186809064429472,
+            "recall": 0.07246376811594203,
+            "AP50": 0.039384487129891455,
+            "AP50_95": 0.013294241965716866
+          },
+          {
+            "class_id": 2,
+            "precision": 0.6628898814999165,
+            "recall": 0.04394087308887775,
+            "AP50": 0.05722196469502739,
+            "AP50_95": 0.007420249943818927
+          },
+          {
+            "class_id": 3,
+            "precision": 0.14443412552714796,
+            "recall": 0.19155844155844157,
+            "AP50": 0.0813734845225594,
+            "AP50_95": 0.024976013219781965
+          },
+          {
+            "class_id": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "AP50": 0.0048525856164383565,
+            "AP50_95": 0.0026824178082191785
+          }
+        ],
+        "timings_ms": {
+          "preprocess": 0.15053499982968788,
+          "inference": 37.818137500016746,
+          "loss": 8.937504389905371e-05,
+          "postprocess": 1.1721468749783526
+        }
+      },
+      "initialization": {
+        "pretrained": true,
+        "variant": "repvit",
+        "initial_weights_sha256": "f0e217723db87e7fb04ddaba8f87d0742166c693c957a83b67de86ae123ad20c",
+        "trainer_initial_weights_verified": true
+      },
+      "weights": {
+        "filename": "pilot-repvit-s2026-r5.pt",
+        "sha256": "a83e66d32c291217f3be0383b4537c93613461a3f1817a5e79d058377f788139",
+        "bytes": 17793511
+      },
+      "hardware": {
+        "torch": "2.9.1+cpu",
+        "cuda": null,
+        "gpu": null,
+        "cudnn": null,
+        "cudnn_enabled": false,
+        "cuda_launch_blocking": "1"
+      },
+      "data_transfer": {
+        "pin_memory": false,
+        "non_blocking": false
+      },
+      "optimizer_implementation": "AdamW fused=False foreach=False; finite gradient norm required",
+      "configuration": {
+        "variant": "repvit",
+        "dataset_profile": "pilot",
+        "epochs": 15,
+        "imgsz": 384,
+        "batch": 8,
+        "device": "cpu",
+        "workers": 0,
+        "cpu_threads": 8,
+        "seed": 2026,
+        "pretrained": true,
+        "lr0": 0.001,
+        "weight_decay": 0.0005,
+        "mosaic": 0.5,
+        "warmup_bias_lr": 0.0,
+        "optimizer_implementation": "scalar_adamw",
+        "cudnn_enabled": false,
+        "pin_memory": false,
+        "non_blocking_transfer": false,
+        "input_normalization": "imagenet_rgb_mean_std_inside_backbone",
+        "cuda_launch_blocking": true
+      },
+      "training_code_sha256": "c7370e19aedfd4ca1244ec77d4c2a4c36439e40f889a4ebf6d4fe2c9922ed914",
+      "configuration_sha256": "c8d5d9f84ccb555a34ef840cd65e3baae6aa4f01fc8c99d690f2a300ef723de6",
+      "evaluation_scope": "source validation subset; not independent test or challenge score",
+      "local_base_revision_at_start": "c86829ba34bdbaf07be4641c4636949e8c26dc8e"
+    },
+    {
+      "run": "pilot-repvit-amsf-s2026",
+      "architecture": "repvit-amsf",
+      "epochs": 15,
+      "image_size": 384,
+      "seed": 2026,
+      "parameters": 8938047,
+      "training_seconds": 2969.823,
+      "execution": {
+        "completed_epochs": 15,
+        "batches": 1440
+      },
+      "metrics": {
+        "aggregate": {
+          "metrics/precision(B)": 0.13068505296422742,
+          "metrics/recall(B)": 0.07236058627362976,
+          "metrics/mAP50(B)": 0.04297862801527861,
+          "metrics/mAP50-95(B)": 0.011344911285259971,
+          "fitness": 0.011344911285259971
+        },
+        "per_class_with_ground_truth": [
+          {
+            "class_id": 0,
+            "precision": 0.12745326302349164,
+            "recall": 0.07692307692307693,
+            "AP50": 0.027842903409560363,
+            "AP50_95": 0.007549753374123764
+          },
+          {
+            "class_id": 1,
+            "precision": 0.12189936589539535,
+            "recall": 0.09057971014492754,
+            "AP50": 0.0440870937367428,
+            "AP50_95": 0.015386764046340828
+          },
+          {
+            "class_id": 2,
+            "precision": 0.19558428954429777,
+            "recall": 0.022222222222222223,
+            "AP50": 0.0521093817641203,
+            "AP50_95": 0.007932100654224778
+          },
+          {
+            "class_id": 3,
+            "precision": 0.2084883463579523,
+            "recall": 0.17207792207792208,
+            "AP50": 0.0857417163480424,
+            "AP50_95": 0.023154917745348187
+          },
+          {
+            "class_id": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "AP50": 0.00511204481792717,
+            "AP50_95": 0.002701020606262307
+          }
+        ],
+        "timings_ms": {
+          "preprocess": 0.15547187499578285,
+          "inference": 42.686148750044595,
+          "loss": 0.00010499998097657226,
+          "postprocess": 1.1502012500386627
+        }
+      },
+      "initialization": {
+        "pretrained": true,
+        "variant": "repvit-amsf",
+        "initial_weights_sha256": "f0e217723db87e7fb04ddaba8f87d0742166c693c957a83b67de86ae123ad20c",
+        "shared_repvit_state_aligned": true,
+        "new_amsf_state_entries": 100,
+        "trainer_initial_weights_verified": true
+      },
+      "weights": {
+        "filename": "pilot-repvit-amsf-s2026.pt",
+        "sha256": "8f8f856cde4ce05e69c969cad0e5e6c30d0b66a1b2ef708b2e55f9f68e93dbdf",
+        "bytes": 18433853
+      },
+      "hardware": {
+        "torch": "2.9.1+cpu",
+        "cuda": null,
+        "gpu": null,
+        "cudnn": null,
+        "cudnn_enabled": false,
+        "cuda_launch_blocking": "1"
+      },
+      "data_transfer": {
+        "pin_memory": false,
+        "non_blocking": false
+      },
+      "optimizer_implementation": "AdamW fused=False foreach=False; finite gradient norm required",
+      "configuration": {
+        "variant": "repvit-amsf",
+        "dataset_profile": "pilot",
+        "epochs": 15,
+        "imgsz": 384,
+        "batch": 8,
+        "device": "cpu",
+        "workers": 0,
+        "cpu_threads": 8,
+        "seed": 2026,
+        "pretrained": true,
+        "lr0": 0.001,
+        "weight_decay": 0.0005,
+        "mosaic": 0.5,
+        "warmup_bias_lr": 0.0,
+        "optimizer_implementation": "scalar_adamw",
+        "cudnn_enabled": false,
+        "pin_memory": false,
+        "non_blocking_transfer": false,
+        "input_normalization": "imagenet_rgb_mean_std_inside_backbone",
+        "cuda_launch_blocking": true
+      },
+      "training_code_sha256": "c7370e19aedfd4ca1244ec77d4c2a4c36439e40f889a4ebf6d4fe2c9922ed914",
+      "configuration_sha256": "24f1916b9064789418280a0076d2892454734fce561228e46959c3a97d3510a3",
+      "evaluation_scope": "source validation subset; not independent test or challenge score",
+      "local_base_revision_at_start": "c86829ba34bdbaf07be4641c4636949e8c26dc8e"
+    }
+  ],
+  "selected_by_validation": "pilot-yolov8n-s2026-r9",
+  "export": {
+    "created_utc": "2026-11-12T14:16:42.556924+00:00",
+    "passed": true,
+    "source_weights": "pilot-yolov8n-s2026-r9.pt",
+    "onnx": "pilot-yolov8n-s2026-r9.onnx",
+    "sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+    "image_size": 384,
+    "provider": "CPUExecutionProvider",
+    "max_raw_absolute_difference": 0.00042724609375,
+    "verification": "FP32 raw predictions; not Jetson/TensorRT validation",
+    "sample_parity": {
+      "passed": true,
+      "pytorch_detections": 1,
+      "onnx_detections": 1,
+      "matched": 1,
+      "min_iou_required": 0.97,
+      "max_score_gap_allowed": 0.01
+    }
+  },
+  "benchmarks": [
+    {
+      "created_utc": "2026-11-12T14:16:45.728741+00:00",
+      "model": "pilot-yolov8n-s2026-r9.pt",
+      "weights_sha256": "8dd346ccb3720053d317f134c6a51c9eb062619022dfd535a1e69a8b35a42d65",
+      "backend": "pytorch",
+      "device": "cpu",
+      "hardware": "CPU",
+      "image_size": 384,
+      "precision": "FP32",
+      "warmup": 5,
+      "iterations": 30,
+      "cuda_launch_blocking": "1",
+      "cpu_threads": 4,
+      "initialization_predictions_before_warmup": 1,
+      "scope": "single-process image prediction including preprocessing and NMS; excludes decoding, model loading, annotation, persistence, HTTP and camera capture",
+      "latency_ms": {
+        "mean": 21.80183333354459,
+        "p50": 20.446949998586206,
+        "p95": 30.240764999689393,
+        "min": 18.274800000654068,
+        "max": 40.208200000051875
+      },
+      "throughput_estimate_fps": 45.86770225701096,
+      "jetson_hardware_verified": false
+    },
+    {
+      "created_utc": "2026-11-12T14:16:46.477326+00:00",
+      "model": "pilot-yolov8n-s2026-r9.onnx",
+      "weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+      "backend": "onnx",
+      "device": "cpu",
+      "hardware": "CPU / ONNX Runtime",
+      "image_size": 384,
+      "precision": "FP32",
+      "warmup": 5,
+      "iterations": 30,
+      "cuda_launch_blocking": "1",
+      "cpu_threads": 4,
+      "initialization_predictions_before_warmup": 1,
+      "scope": "single-process image prediction including preprocessing and NMS; excludes decoding, model loading, annotation, persistence, HTTP and camera capture",
+      "latency_ms": {
+        "mean": 16.975716667366214,
+        "p50": 16.6337000009662,
+        "p95": 18.665575001432444,
+        "min": 15.326100001402665,
+        "max": 25.62269999907585
+      },
+      "throughput_estimate_fps": 58.907674980366544,
+      "jetson_hardware_verified": false
+    }
+  ],
+  "jetson_hardware_verified": false,
+  "paper_novelty_established": false
+}

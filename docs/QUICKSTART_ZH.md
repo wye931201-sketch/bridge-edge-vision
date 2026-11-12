@@ -31,6 +31,20 @@ uv run bridge-edge serve
 
 如果 CUDA 运行时与驱动不匹配，先用 `--device cpu` 验证推理；不要把环境未通过的运行写成显卡结果。模型和数据不提交到源码仓库，克隆仓库后需要自行下载并训练。
 
+## 只部署 ONNX，不安装 PyTorch
+
+在已经导出并核验模型后，可在独立 Python 3.12 环境仅安装推理依赖：
+
+```powershell
+python -m venv .venv-edge
+.venv-edge\Scripts\python -m pip install -r requirements-edge.txt
+.venv-edge\Scripts\python -m pip install --no-deps .
+.venv-edge\Scripts\python main.py predict --weights path/to/model.onnx --source path/to/image.jpg --device cpu
+.venv-edge\Scripts\python scripts/offline_probe.py --weights path/to/model.onnx --source path/to/image.jpg --require-no-torch
+```
+
+保留同名的 `.export.json` 与 ONNX 文件，便于检查模型字节是否改变。最后一步在新的 Python 进程内禁止向外建立 socket 连接，再执行真实识别；它不改变操作系统的联网设置。此精简环境用于图片/视频推理，不承担训练或 PyTorch 导出。
+
 ## 常见情况
 
 - **模型尚未就绪**：代码安装成功不等于模型已训练。先完成数据准备与训练。

@@ -44,6 +44,8 @@ def export_onnx(weights, image_size=384, device="cpu", sample=None):
               "provider": "CPUExecutionProvider", "max_raw_absolute_difference": float(np.max(np.abs(actual - expected))),
               "verification": "FP32 raw predictions; not Jetson/TensorRT validation"}
     if sample:
+        write_json(exported.with_suffix(".export.json"), {**report, "passed": False,
+                   "verification_stage": "raw predictions verified; sample detection parity pending"})
         image = decode_image(Path(sample).read_bytes())
         torch_engine = Detector(weights, device="cpu", image_size=image_size)
         ort_engine = Detector(exported, device="cpu", image_size=image_size)

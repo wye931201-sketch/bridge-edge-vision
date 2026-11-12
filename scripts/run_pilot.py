@@ -57,6 +57,7 @@ def main():
                     and str(item.get("configuration", {}).get("device")) == device
                     and item.get("execution", {}).get("completed_epochs") == args.epochs
                     and (location("models") / item.get("weights", {}).get("filename", "missing")).is_file()]
+        matching = [item for item in matching if sha256(location("models") / item["weights"]["filename"]) == item["weights"]["sha256"]]
         existing = max(matching, key=lambda item: item["created_utc"]) if matching else {}
         if existing:
             record = existing
@@ -91,7 +92,9 @@ def main():
         public["optimizer_implementation"] = record.get("optimizer_implementation")
         public["configuration"] = record["configuration"]
         public["training_code_sha256"] = record.get("training_code_sha256")
-        public["code_revision"] = record.get("code_revision")
+        public["configuration_sha256"] = record["configuration_sha256"]
+        public["evaluation_scope"] = record["evaluation_scope"]
+        public["local_base_revision_at_start"] = record.get("code_revision")
     report = {"created_utc": utc_now(), "scope": f"single-seed pilot, {audit['stats']['train']['images']} train / {audit['stats']['val']['images']} validation images after quarantine",
               "independent_test_evaluated": False, "dataset": progress["dataset"], "experiments": public_records,
               "selected_by_validation": best["run_name"], "export": exported, "benchmarks": benchmarks,

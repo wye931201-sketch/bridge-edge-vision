@@ -42,7 +42,9 @@ def available_models():
             entries.append({"id": path.name, "variant": data.get("architecture"), "scope": data.get("dataset_scope"),
                             "map50_95": data.get("metrics", {}).get("aggregate", {}).get("metrics/mAP50-95(B)")})
     for path in sorted(location("models").glob("*.onnx")):
-        if path.with_suffix(".pt").name in {entry["id"] for entry in entries}:
+        export_card = path.with_suffix(".export.json")
+        verified = export_card.is_file() and read_json(export_card).get("passed") is True
+        if verified and path.with_suffix(".pt").name in {entry["id"] for entry in entries}:
             entries.append({"id": path.name, "variant": "onnx", "scope": "export of trained detector"})
     return entries
 
@@ -87,13 +89,20 @@ class Detector:
         self.weights_sha256 = sha256(self.path)
         if self.backend == "pytorch":
             card = self.path.with_suffix(".json")
-            if card.exists() and read_json(card).get("hardware", {}).get("cudnn_enabled") is False:
+            metadata = read_json(card) if card.exists() else {}
+            expected = metadata.get("weights", {}).get("sha256")
+            if expected and expected != self.weights_sha256:
+                raise ValueError("Checkpoint bytes differ from the recorded trained model")
+            if metadata.get("hardware", {}).get("cudnn_enabled") is False:
                 import torch
                 torch.backends.cudnn.enabled = False
             self.model = load_detector(self.path)
             if dict(self.model.names) != NAMES:
                 raise ValueError("Checkpoint taxonomy differs from this five-class bridge detector")
         else:
+            export_card = self.path.with_suffix(".export.json")
+            if export_card.exists() and read_json(export_card).get("sha256") != self.weights_sha256:
+                raise ValueError("ONNX bytes differ from the verified export")
             import onnxruntime as ort
             options = ort.SessionOptions()
             options.intra_op_num_threads = 4

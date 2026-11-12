@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from bridge_edge.store import get_prediction, list_predictions, record_prediction
-from bridge_edge.runtime.engine import decode_image, available_models
+from bridge_edge.runtime.engine import decode_image, available_models, Detector
 from bridge_edge.utils import write_json, sha256
 
 
@@ -48,9 +48,20 @@ class LocalStorageTests(unittest.TestCase):
                 (storage("models") / (name + ".onnx")).write_bytes(b"fixture")
                 write_json(storage("models") / (name + ".json"), {"status": "passed", "run_name": "pilot-" + name,
                            "dataset_scope": "pilot", "dataset_manifest_sha256": digest})
+                write_json(storage("models") / (name + ".export.json"), {"passed": True})
             (storage("models") / "unpaired.onnx").write_bytes(b"fixture")
             with patch("bridge_edge.runtime.engine.location", side_effect=storage):
                 self.assertEqual({item["id"] for item in available_models()}, {"current.pt", "current.onnx"})
+
+    def test_changed_checkpoint_is_rejected_before_loading(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            weights = Path(temporary) / "model.pt"
+            weights.write_bytes(b"changed checkpoint")
+            write_json(weights.with_suffix(".json"), {"weights": {"sha256": "recorded-original-hash"}})
+            with patch("bridge_edge.runtime.engine.load_detector") as loader:
+                with self.assertRaisesRegex(ValueError, "Checkpoint bytes differ"):
+                    Detector(weights, device="cpu")
+                loader.assert_not_called()
 
 
 if __name__ == "__main__":

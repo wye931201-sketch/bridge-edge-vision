@@ -77,11 +77,13 @@ def _predict(content, filename, model_id, confidence, tile):
     image = decode_image(content)
     device = "0" if hardware()["cuda_available"] and not model_id.endswith(".onnx") else "cpu"
     with _inference_lock:
-        key = (model_id, device)
+        model_path = location("models") / model_id
+        state = model_path.stat()
+        key = (model_id, device, state.st_mtime_ns, state.st_size)
         if key not in _models:
             # Avoid keeping every experimental model resident on an 8GB GPU.
             _models.clear()
-            _models[key] = Detector(location("models") / model_id, device=device)
+            _models[key] = Detector(model_path, device=device)
         result = _models[key].predict(image, confidence=confidence, tile_size=768 if tile else 0)
     saved = save_prediction(image, result, filename)
     saved["annotated_url"] = f"/api/artifacts/{saved['id']}/annotated.jpg"

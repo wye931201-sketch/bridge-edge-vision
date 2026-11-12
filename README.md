@@ -7,7 +7,15 @@
 > 研究状态：v0.1 工程与预实验。完整实验数据见 `artifacts/experiments/pilot_results.json`（运行预实验后生成）。预实验不等于论文最终结果，也不构成结构安全鉴定。
 
 <!-- experiment-status:start -->
-当前进度：固定 **766 训练 / 160 验证图**，CPU YOLOv8n 已完成 15 轮（mAP50 **0.0793**，mAP50–95 **0.0319**）。RepViT 与多尺度模块的完整对照正在执行，尚未发布其最终结果。
+已完成三组相同数据与训练预算的 CPU 预实验：**766 训练 / 160 验证图**，15 轮，输入 384，seed 2026。
+
+| 模型 | mAP50 | mAP50–95 |
+|---|---:|---:|
+| yolov8n | 7.93% | 3.19% |
+| repvit | 3.81% | 1.01% |
+| repvit-amsf | 4.30% | 1.13% |
+
+这是单种子小样本预实验，当前精度还需要改进。完整数值、限制与设备实测见[模型卡](docs/MODEL_CARD.md)和[实验 JSON](artifacts/experiments/pilot_results.json)。
 <!-- experiment-status:end -->
 
 ## 可以做什么
@@ -84,6 +92,7 @@ python main.py train --config experiments/pilot-repvit-amsf.yaml
 
 ```powershell
 python scripts/run_pilot.py
+python scripts/summarize_results.py
 ```
 
 每次训练创建新的 run，保存配置、数据清单哈希、初始化验证、逐轮日志、真实验证指标与权重。既有实验不会被同名训练覆盖。

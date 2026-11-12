@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-11-12T10:04:10.263389+00:00",
+  "created_utc": "2026-11-12T14:17:55.723845+00:00",
   "passed": true,
   "weights": "pilot-yolov8n-s2026-r9.pt",
   "weights_sha256": "8dd346ccb3720053d317f134c6a51c9eb062619022dfd535a1e69a8b35a42d65",
@@ -120,5 +120,12 @@
   ],
   "pytorch_detection_total": 17,
   "sample_policy": "first 12 fixed validation filenames; confidence 0.15; no result-based selection",
+  "video": {
+    "frames_read": 12,
+    "frames_processed": 3,
+    "sample_interval": 4,
+    "fixture_sha256": "7f36550563bf660d32f406d438425c841f4c6abaebf201eed1cbcf917caf64bb",
+    "scope": "12-frame repeated validation image in MJPEG; decoding and sampling only, not real camera validation"
+  },
   "web_visual_inspection_performed": false
 }

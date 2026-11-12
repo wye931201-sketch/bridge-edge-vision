@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-11-12T14:19:16.929328+00:00",
+  "passed": true,
+  "installed_wheel_outside_source_checkout": true,
+  "packaged_configs_present": true,
+  "training_source_sha256": "c7370e19aedfd4ca1244ec77d4c2a4c36439e40f889a4ebf6d4fe2c9922ed914",
+  "backend": "onnx",
+  "pytorch_installed": false,
+  "outbound_sockets_denied": true,
+  "socket_connections_attempted": 0,
+  "weights": "pilot-yolov8n-s2026-r9.onnx",
+  "weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+  "source_sha256": "531dddc807c5c56d75ec31ad9864dbf98bc136c84497568424adbb1724d8c38a",
+  "confidence_threshold": 0.15,
+  "finding_count": 2,
+  "scope": "cold Python process loading the built wheel and a real ONNX model; no OS firewall change"
+}

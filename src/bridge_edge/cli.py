@@ -48,7 +48,7 @@ def _parser():
     exporting.add_argument("--weights", required=True)
     exporting.add_argument("--imgsz", type=int, default=384)
     exporting.add_argument("--sample")
-    bench = commands.add_parser("benchmark", help="在当前设备测量真实端到端耗时")
+    bench = commands.add_parser("benchmark", help="在当前设备测量预处理、推理与 NMS 耗时")
     bench.add_argument("--weights", required=True)
     bench.add_argument("--source", required=True)
     bench.add_argument("--device", default="auto")

@@ -1,0 +1,15 @@
+{
+  "created_utc": "2026-11-12T14:19:41.135385+00:00",
+  "passed": true,
+  "socket_connections_attempted": 0,
+  "outbound_sockets_denied": true,
+  "backend": "onnx",
+  "device": "cpu",
+  "pytorch_installed": true,
+  "weights": "pilot-yolov8n-s2026-r9.onnx",
+  "weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+  "source_sha256": "531dddc807c5c56d75ec31ad9864dbf98bc136c84497568424adbb1724d8c38a",
+  "finding_count": 2,
+  "confidence_threshold": 0.15,
+  "scope": "cold Python process, model loading and one real image prediction; not an OS-wide network isolation claim"
+}

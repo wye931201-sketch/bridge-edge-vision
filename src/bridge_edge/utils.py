@@ -44,12 +44,16 @@ def revision(root: Path) -> str | None:
 
 def training_fingerprint(root: Path) -> str:
     """Core training/model sources, independent of local paths and result files."""
-    files = list((root / "src" / "bridge_edge" / "models").glob("*.py"))
-    files += [root / "src" / "bridge_edge" / "training.py"]
-    files += list((root / "configs" / "models").glob("*.yaml"))
+    from .paths import CONFIG_ROOT
+    package = root / "src" / "bridge_edge"
+    if not package.is_dir():
+        package = Path(__file__).resolve().parent
+    files = [(f"src/bridge_edge/models/{path.name}", path) for path in (package / "models").glob("*.py")]
+    files += [("src/bridge_edge/training.py", package / "training.py")]
+    files += [(f"configs/models/{path.name}", path) for path in (CONFIG_ROOT / "models").glob("*.yaml")]
     digest = hashlib.sha256()
-    for path in sorted(files):
-        digest.update(path.relative_to(root).as_posix().encode() + b"\0" + bytes.fromhex(sha256(path)))
+    for name, path in sorted(files):
+        digest.update(name.encode() + b"\0" + bytes.fromhex(sha256(path)))
     return digest.hexdigest()
 
 
