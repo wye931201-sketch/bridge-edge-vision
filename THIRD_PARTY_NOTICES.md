@@ -13,3 +13,8 @@
 This repository's source code is released under AGPL-3.0-only to remain compatible with its Ultralytics integration. Importing a library does not transfer authorship of that library to this project. Third-party source trees, environments, raw data and model binaries are not counted as original project code and are not vendored here.
 
 Initial YOLO and RepViT model files are obtained from their published sources and retain their own terms. Training on noncommercial data does not establish permission for commercial distribution of a trained product. Commercial rights, if required later, must be established from the relevant rights holders.
+# Optional industrial gallery
+
+The optional scratch gallery downloads a pinned ONNX release from [winthegame259/steel-surface-defect-detection](https://github.com/winthegame259/steel-surface-defect-detection/releases/tag/v1.0.0), whose project code is AGPL-3.0. It is an upstream pretrained model, not a model trained by this project. No weights are redistributed here.
+
+NEU-DET scratch photographs and XML annotations are obtained from a pinned [GitHub mirror](https://github.com/siddhartamukherjee/NEU-DET-Steel-Surface-Defect-Detection) and checked against Git blob hashes. The [dataset maintainer page](https://faculty.neu.edu.cn/songkechen/zh_CN/zdylm/263270/list/index.htm) requests citation but does not state a standard dataset license. This project does not grant or imply redistribution/commercial rights over these assets. Source images and annotations remain local. See `docs/INDUSTRIAL_GALLERY.md` and `configs/industrial_sources.json`.

@@ -4,6 +4,8 @@
 
 当前覆盖：**裂缝、混凝土剥落、露筋、锈蚀/锈迹、蜂窝麻面**。图片推理不依赖云端 API；本版本不加载视觉语言大模型。
 
+另有**裂缝、剥落、锈蚀、工业划痕**四组照片对比导出入口：前三组使用本项目桥梁模型，划痕使用注明来源的独立工业 ONNX 预训练模型。[来源与使用边界](docs/INDUSTRIAL_GALLERY.md)。
+
 > 研究状态：v0.1 工程与预实验。完整实验数据见 `artifacts/experiments/pilot_results.json`（运行预实验后生成）。预实验不等于论文最终结果，也不构成结构安全鉴定。
 
 <!-- experiment-status:start -->
@@ -113,6 +115,27 @@ python main.py predict --source path/to/images --tile-size 768
 python main.py video --source path/to/video.mp4 --every 5 --max-frames 300
 ```
 
+直接查看原图与检测图片的对比：
+
+```powershell
+python main.py compare
+python main.py compare --source path/to/images --output path/to/对比
+python main.py compare --classes crack --tile-size 768 --output path/to/裂缝对比
+```
+
+默认导出全部固定验证图，按文件名排序，置信度阈值 0.15。输出目录为本地数据目录下的 `对比/1`、`对比/2`……每个数字文件夹仅放原始图片和 `识别结果.jpg`；根目录的 `打开对比.html` 可左右查看。原始图片逐字节复制，框由模型实际预测，JSON 追踪记录放在数据目录的 `reports` 中。已有对比文件夹不会被自动覆盖。
+
+`--classes crack` 按来源标注选取含裂缝的照片，不按预测效果挑图；`--tile-size 768` 使用高分辨率切片识别。当前五类模型不包含工业划痕类别。
+
+一次导出四组各 24 张受损照片及模型输出（首次下载公开工业图片和模型需要联网，识别可离线）：
+
+```powershell
+python scripts/download_industrial.py
+python main.py gallery --output path/to/四类对比
+```
+
+工业划痕通过此 `gallery` 入口处理。图片按源标注分组，输出框来自各自模型，不把源标注框当作预测框。
+
 ### 4. 导出与测量
 
 ```powershell
@@ -147,6 +170,8 @@ docs/                    数据卡、实验协议、Jetson 路线和初学者指
 ```
 
 运行测试：`python -m unittest discover -s tests -v`。GitHub Actions 只跑轻量 CPU 单元和 HTTP 合约；GPU 训练与部署验收由本地真实运行记录提供。
+
+查看源码行数：`python scripts/count_lines.py`。该工具按 Git 提交统计源码文件，区分总行数和非空行数，不把依赖、文档、锁文件或实验数据计入代码量。
 
 ## 范围与后续工作
 

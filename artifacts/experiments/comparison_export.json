@@ -1,0 +1,48 @@
+{
+  "created_utc": "2026-11-13T03:39:59.227709+00:00",
+  "passed": true,
+  "pairs": 96,
+  "image_files": 192,
+  "categories": [
+    {
+      "name": "裂缝",
+      "count": 24,
+      "first_folder": 1,
+      "last_folder": 24
+    },
+    {
+      "name": "剥落",
+      "count": 24,
+      "first_folder": 25,
+      "last_folder": 48
+    },
+    {
+      "name": "锈蚀",
+      "count": 24,
+      "first_folder": 49,
+      "last_folder": 72
+    },
+    {
+      "name": "划痕",
+      "count": 24,
+      "first_folder": 73,
+      "last_folder": 96
+    }
+  ],
+  "selection": "source annotations and filename order, no prediction-quality selection, no repeated images",
+  "originals_byte_identical": true,
+  "all_images_decoded_and_dimensions_checked": true,
+  "bridge_model_and_dataset_manifest_unchanged": true,
+  "pytorch_installed_in_export_environment": false,
+  "dataset_manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
+  "bridge_weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+  "industrial_weights_sha256": "495ad53dbff99bcbf629ec67f90e1e627800ab8db78177de592648b6e00345b1",
+  "industrial_model_origin": "upstream pretrained release, not trained in this project",
+  "confidence_threshold": 0.15,
+  "bridge_tile_size": 768,
+  "industrial_tile_size": 0,
+  "superseded_intermediate_pairs_removed": 200,
+  "local_unit_and_api_contract_tests": 36,
+  "independent_test_claimed": false,
+  "note": "actual model candidates, not ground-truth overlays; upstream industrial model training overlap is unknown"
+}

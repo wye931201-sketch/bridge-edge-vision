@@ -169,7 +169,7 @@ class Detector:
                 "interpretation": "Visual findings only; confidence is not a calibrated safety probability"}
 
 
-def annotate(image, detections):
+def annotate(image, detections, palette=None):
     canvas = Image.fromarray(image[:, :, ::-1])
     draw = ImageDraw.Draw(canvas)
     try:
@@ -179,7 +179,7 @@ def annotate(image, detections):
     line = max(2, min(image.shape[:2]) // 350)
     for finding in detections:
         box = finding["xyxy"]
-        color = BY_ID[finding["class_id"]].color
+        color = palette[finding["class_id"]] if palette is not None else BY_ID[finding["class_id"]].color
         draw.rectangle(box, outline=color, width=line)
         text = f"{finding['label']} {finding['confidence']:.2f}"
         bounds = draw.textbbox((0, 0), text, font=font)

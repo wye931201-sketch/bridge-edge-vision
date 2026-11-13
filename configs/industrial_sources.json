@@ -1,0 +1,171 @@
+{
+  "image_repository": "siddhartamukherjee/NEU-DET-Steel-Surface-Defect-Detection",
+  "image_commit": "351bee21b56bbf97a1e1d18262bceb202eb7ef41",
+  "dataset_homepage": "https://faculty.neu.edu.cn/songkechen/zh_CN/zdylm/263270/list/index.htm",
+  "data_license": "No explicit standard dataset license found on the maintainer page; local research demonstration only, no redistribution",
+  "image_selection": "first 24 scratches image paths in lexicographic order; not selected by prediction quality",
+  "images": [
+    {
+      "image": "IMAGES/scratches_1.jpg",
+      "image_git_oid": "bc99868018736fde5d50825c8862fd67b21f20c7",
+      "annotation": "ANNOTATIONS/scratches_1.xml",
+      "annotation_git_oid": "71ed5a415e82259470512622dd0537db719972a7"
+    },
+    {
+      "image": "IMAGES/scratches_10.jpg",
+      "image_git_oid": "a469100e05a9642e64fe0b61e26870f5fa9ed4bb",
+      "annotation": "ANNOTATIONS/scratches_10.xml",
+      "annotation_git_oid": "6459cda4d67fc166fe8ed90f28cd39de68ad3d86"
+    },
+    {
+      "image": "IMAGES/scratches_100.jpg",
+      "image_git_oid": "20cef2105be358ce3ee15c1005c666e5164b677d",
+      "annotation": "ANNOTATIONS/scratches_100.xml",
+      "annotation_git_oid": "855334c710e21aa8bd10352e8e3eb33a784cd5b7"
+    },
+    {
+      "image": "IMAGES/scratches_101.jpg",
+      "image_git_oid": "fc040fca08983b8d23deede885245ab3e1753136",
+      "annotation": "ANNOTATIONS/scratches_101.xml",
+      "annotation_git_oid": "968118ad0eb013ea7a0c42f03c02f510bab42136"
+    },
+    {
+      "image": "IMAGES/scratches_102.jpg",
+      "image_git_oid": "8f8c2dbdfce3dd610a3d418f057ef07d8189656c",
+      "annotation": "ANNOTATIONS/scratches_102.xml",
+      "annotation_git_oid": "faf9522749fed65cec03e01c34c9342fc7c08921"
+    },
+    {
+      "image": "IMAGES/scratches_103.jpg",
+      "image_git_oid": "b87af0cda7599c13b1ee3b67dde4de60459b7885",
+      "annotation": "ANNOTATIONS/scratches_103.xml",
+      "annotation_git_oid": "4d23d88d14b529745be847b247c4e5e21d5a9803"
+    },
+    {
+      "image": "IMAGES/scratches_104.jpg",
+      "image_git_oid": "fdb489794263b4fa5debcff6d0eab94e9b0775f2",
+      "annotation": "ANNOTATIONS/scratches_104.xml",
+      "annotation_git_oid": "cfa7022bed92a6eb92a590cef8a580d9492a038a"
+    },
+    {
+      "image": "IMAGES/scratches_105.jpg",
+      "image_git_oid": "f2aa35a54c19a75f74886524c4169766c733dc10",
+      "annotation": "ANNOTATIONS/scratches_105.xml",
+      "annotation_git_oid": "32e0fb778f52d0f93322a3010469a8c60286f1e1"
+    },
+    {
+      "image": "IMAGES/scratches_106.jpg",
+      "image_git_oid": "ef6e6b1f1096a9596be2d22396ce65c28502000e",
+      "annotation": "ANNOTATIONS/scratches_106.xml",
+      "annotation_git_oid": "c86cf53c777a481eb0b616828e8553581263a630"
+    },
+    {
+      "image": "IMAGES/scratches_107.jpg",
+      "image_git_oid": "9c1defc77c7927b935d2d3ce4f0c620d6a97c02a",
+      "annotation": "ANNOTATIONS/scratches_107.xml",
+      "annotation_git_oid": "8bf05d4e001d153eba8af0aa8747eb25bb257836"
+    },
+    {
+      "image": "IMAGES/scratches_108.jpg",
+      "image_git_oid": "1f11d6effa989887aa13ba069c0763e361ba6fd7",
+      "annotation": "ANNOTATIONS/scratches_108.xml",
+      "annotation_git_oid": "290d7fe7aa03c5fef697466376c1a50e2ec5e45a"
+    },
+    {
+      "image": "IMAGES/scratches_109.jpg",
+      "image_git_oid": "dde16733590d2b0df7ba27b451307a119178d398",
+      "annotation": "ANNOTATIONS/scratches_109.xml",
+      "annotation_git_oid": "d40e83551f6bf681bb02c0ed1760e3739f6ec387"
+    },
+    {
+      "image": "IMAGES/scratches_11.jpg",
+      "image_git_oid": "484b93276d3716c93025c5f3b2fe026ee9717b39",
+      "annotation": "ANNOTATIONS/scratches_11.xml",
+      "annotation_git_oid": "e89e1af8387cdd0d388fb33d940962a2137f18a7"
+    },
+    {
+      "image": "IMAGES/scratches_110.jpg",
+      "image_git_oid": "2c3867dd2a8dbe7234f5eb0a4a2447173454c58f",
+      "annotation": "ANNOTATIONS/scratches_110.xml",
+      "annotation_git_oid": "2c03bb1c7fbe2636363754edfb496fa292561e44"
+    },
+    {
+      "image": "IMAGES/scratches_111.jpg",
+      "image_git_oid": "554f96dd01ee5956d6a3e9ba77603ccef40980c7",
+      "annotation": "ANNOTATIONS/scratches_111.xml",
+      "annotation_git_oid": "cd55c23f05da265292db0c9b3304ef49eb916cd7"
+    },
+    {
+      "image": "IMAGES/scratches_112.jpg",
+      "image_git_oid": "685c0d800f221df88918e9072628e18948967c5a",
+      "annotation": "ANNOTATIONS/scratches_112.xml",
+      "annotation_git_oid": "b3f7fcb0084c4906179cae2b98498b9b9f908f0a"
+    },
+    {
+      "image": "IMAGES/scratches_113.jpg",
+      "image_git_oid": "83efa2146e596896b0e2e5bf53858fbbde346f5c",
+      "annotation": "ANNOTATIONS/scratches_113.xml",
+      "annotation_git_oid": "35a43efe24cf646c976cd4931c3ae353fda43f18"
+    },
+    {
+      "image": "IMAGES/scratches_114.jpg",
+      "image_git_oid": "a1c375b997cf03188fd14b30149a02aabd6640e9",
+      "annotation": "ANNOTATIONS/scratches_114.xml",
+      "annotation_git_oid": "1501098de8cdb2089c0f05482af2cf1699ae5a2b"
+    },
+    {
+      "image": "IMAGES/scratches_115.jpg",
+      "image_git_oid": "48a632e40347193bd5c313051cdc471d0fce297f",
+      "annotation": "ANNOTATIONS/scratches_115.xml",
+      "annotation_git_oid": "88644b351687496c456ca7d6f0a09f7a898661b0"
+    },
+    {
+      "image": "IMAGES/scratches_116.jpg",
+      "image_git_oid": "70ee6543692fded08d30f5e6207617321378a37c",
+      "annotation": "ANNOTATIONS/scratches_116.xml",
+      "annotation_git_oid": "11a68c18e917fd69321eeb88f9945d5b2d495ebb"
+    },
+    {
+      "image": "IMAGES/scratches_117.jpg",
+      "image_git_oid": "e7689a0b42d21a3aecb68865e26a501d4dd2d650",
+      "annotation": "ANNOTATIONS/scratches_117.xml",
+      "annotation_git_oid": "531511a08b59b2e890ff83f99606ecbe63ea02ea"
+    },
+    {
+      "image": "IMAGES/scratches_118.jpg",
+      "image_git_oid": "cb86456e97074eeda6da7e0c5aec9da3136108c0",
+      "annotation": "ANNOTATIONS/scratches_118.xml",
+      "annotation_git_oid": "325b979ee48caf1515bec9e84ab6814e722b3690"
+    },
+    {
+      "image": "IMAGES/scratches_119.jpg",
+      "image_git_oid": "6b7f18475d10b7f31245739fc808317395a64ce4",
+      "annotation": "ANNOTATIONS/scratches_119.xml",
+      "annotation_git_oid": "d14763d3b267edf4d1cfc48b60ac3f07e2151109"
+    },
+    {
+      "image": "IMAGES/scratches_12.jpg",
+      "image_git_oid": "5930f1a600696d6dbd6d96a07c541630a94edad3",
+      "annotation": "ANNOTATIONS/scratches_12.xml",
+      "annotation_git_oid": "4685272ca0e6823699f4072dc282ef0d128c7d2a"
+    }
+  ],
+  "model": {
+    "repository": "winthegame259/steel-surface-defect-detection",
+    "source_commit": "bbee6dadc73b3cec51f6ee6c26ae05d042802d86",
+    "release": "v1.0.0",
+    "filename": "neu_det_yolov8n_best.onnx",
+    "url": "https://github.com/winthegame259/steel-surface-defect-detection/releases/download/v1.0.0/neu_det_yolov8n_best.onnx",
+    "sha256": "495ad53dbff99bcbf629ec67f90e1e627800ab8db78177de592648b6e00345b1",
+    "code_license": "AGPL-3.0",
+    "scope": "upstream pretrained model; not trained here; image overlap with its training split is unknown"
+  },
+  "names": [
+    "crazing",
+    "inclusion",
+    "patches",
+    "pitted_surface",
+    "rolled-in_scale",
+    "scratches"
+  ]
+}
