@@ -7,10 +7,29 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from bridge_edge.store import get_prediction, list_predictions, record_prediction
 from bridge_edge.runtime.engine import decode_image, available_models, Detector
+from bridge_edge.runtime.engine import save_prediction
 from bridge_edge.utils import write_json, sha256
 
 
 class LocalStorageTests(unittest.TestCase):
+    def test_saved_empty_prediction_is_an_explicit_result_card(self):
+        import numpy as np
+        from PIL import Image
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            def locate(name):
+                path = root / name
+                path.mkdir(exist_ok=True)
+                return path
+            result = {"model": "fixture.onnx", "created_utc": "2026-01-01T00:00:00+00:00", "total_latency_ms": 2.,
+                      "finding_count": 0, "detections": [], "confidence_threshold": .25}
+            with patch("bridge_edge.runtime.engine.location", side_effect=locate), patch("bridge_edge.store.workspace", return_value=root):
+                saved = save_prediction(np.zeros((40, 60, 3), dtype=np.uint8), result)
+                self.assertEqual(saved["rendering"]["status"], "empty")
+                self.assertEqual(get_prediction(saved["id"])["rendering"]["status"], "empty")
+                with Image.open(root / "predictions" / saved["id"] / "annotated.jpg") as rendered:
+                    self.assertGreater(rendered.height, 40)
+
     def test_history_round_trip_with_sql_characters(self):
         with tempfile.TemporaryDirectory() as temporary, patch("bridge_edge.store.workspace", return_value=Path(temporary)):
             data = {"id": "a" * 32, "created_utc": "2026-01-01T00:00:00+00:00", "model": "pilot.pt",

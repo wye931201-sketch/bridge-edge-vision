@@ -57,9 +57,11 @@ class ComparisonExportTests(unittest.TestCase):
                 self.assertEqual({path.name for path in folder.iterdir()}, {"原始图片.png", "识别结果.jpg"})
                 self.assertEqual((folder / "原始图片.png").read_bytes(), (root / "raw" / filename).read_bytes())
                 with Image.open(folder / "识别结果.jpg") as image:
-                    self.assertEqual(image.size, (40, 30))
+                    self.assertEqual(list(image.size), report["items"][number - 1]["rendering"]["rendered_size"])
+                    self.assertGreater(image.height, 30)
                     image.verify()
-            self.assertIn("第 1 组", (output / "打开对比.html").read_text("utf-8"))
+            self.assertIn('"number": 1', (output / "打开对比.html").read_text("utf-8"))
+            self.assertTrue((output / "gallery.js").is_file())
             self.assertEqual(read_json(root / "reports/latest_comparison_export.json")["pairs"], 2)
 
     def test_existing_output_is_never_overwritten(self):
@@ -83,6 +85,7 @@ class ComparisonExportTests(unittest.TestCase):
             self.assertEqual(result["pairs"], 1)
             self.assertEqual(result["items"][0]["source_filename"], "a.png")
             self.assertEqual(result["items"][0]["detections"][0]["label"], "spalling")
+            self.assertEqual(result["items"][0]["rendering"]["status"], "target_missed")
             self.assertEqual(result["source_class_filters"], ["crack"])
             self.assertEqual(result["tile_size"], 768)
 

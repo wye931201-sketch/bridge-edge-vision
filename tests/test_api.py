@@ -36,6 +36,22 @@ class ApiContractTests(unittest.TestCase):
     def test_unknown_history_id(self):
         self.assertEqual(self.client.get("/api/history/invalid").status_code, 404)
 
+    def test_comparison_routes_expose_only_the_review_page_assets_and_pair_images(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "打开对比.html").write_text("<h1>图片对比</h1>", "utf-8")
+            (root / "gallery.js").write_text("\"use strict\";", "utf-8")
+            (root / "1").mkdir()
+            (root / "1/识别结果.jpg").write_bytes(b"fixture-image")
+            (root / "1/result.json").write_text("private metadata", "utf-8")
+            with patch("bridge_edge.server.comparison_root", return_value=root):
+                self.assertEqual(self.client.get("/comparison/").status_code, 200)
+                self.assertIn("图片对比", self.client.get("/comparison/").text)
+                self.assertEqual(self.client.get("/comparison/gallery.js").status_code, 200)
+                self.assertEqual(self.client.get("/comparison/1/识别结果.jpg").content, b"fixture-image")
+                for url in ("/comparison/private.json", "/comparison/1/result.json", "/comparison/01/识别结果.jpg"):
+                    self.assertEqual(self.client.get(url).status_code, 404)
+
     def test_invalid_pagination(self):
         self.assertEqual(self.client.get("/api/history?limit=1000").status_code, 400)
 

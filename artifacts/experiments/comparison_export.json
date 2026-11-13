@@ -1,48 +1,73 @@
 {
-  "created_utc": "2026-11-13T03:39:59.227709+00:00",
+  "created_utc": "2026-11-13T04:33:50.713200+00:00",
   "passed": true,
   "pairs": 96,
   "image_files": 192,
+  "same_source_photographs": true,
+  "all_originals_byte_identical": true,
+  "all_result_cards_have_explicit_status_header": true,
+  "all_192_images_decoded": true,
+  "superseded_pairs_removed": 96,
   "categories": [
     {
-      "name": "裂缝",
-      "count": 24,
-      "first_folder": 1,
-      "last_folder": 24
+      "category": "裂缝",
+      "images": 24,
+      "before_empty": 11,
+      "after_empty": 3,
+      "before_target_candidates": 3,
+      "after_target_candidates": 10
     },
     {
-      "name": "剥落",
-      "count": 24,
-      "first_folder": 25,
-      "last_folder": 48
+      "category": "剥落",
+      "images": 24,
+      "before_empty": 6,
+      "after_empty": 1,
+      "before_target_candidates": 14,
+      "after_target_candidates": 20
     },
     {
-      "name": "锈蚀",
-      "count": 24,
-      "first_folder": 49,
-      "last_folder": 72
+      "category": "锈蚀",
+      "images": 24,
+      "before_empty": 8,
+      "after_empty": 2,
+      "before_target_candidates": 13,
+      "after_target_candidates": 20
     },
     {
-      "name": "划痕",
-      "count": 24,
-      "first_folder": 73,
-      "last_folder": 96
+      "category": "划痕",
+      "images": 24,
+      "before_empty": 0,
+      "after_empty": 0,
+      "before_target_candidates": 24,
+      "after_target_candidates": 24
     }
   ],
-  "selection": "source annotations and filename order, no prediction-quality selection, no repeated images",
-  "originals_byte_identical": true,
-  "all_images_decoded_and_dimensions_checked": true,
-  "bridge_model_and_dataset_manifest_unchanged": true,
-  "pytorch_installed_in_export_environment": false,
+  "status_counts": {
+    "detected": 74,
+    "target_missed": 16,
+    "empty": 6
+  },
   "dataset_manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
   "bridge_weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
   "industrial_weights_sha256": "495ad53dbff99bcbf629ec67f90e1e627800ab8db78177de592648b6e00345b1",
-  "industrial_model_origin": "upstream pretrained release, not trained in this project",
-  "confidence_threshold": 0.15,
-  "bridge_tile_size": 768,
-  "industrial_tile_size": 0,
-  "superseded_intermediate_pairs_removed": 200,
-  "local_unit_and_api_contract_tests": 36,
+  "crack_auxiliary_weights_sha256": "1cdb51a68a16b8073cd5f8da9a035ff25992f013ca6f66213d72076b6ed15911",
+  "crack_auxiliary_settings": {
+    "threshold": 0.4,
+    "min_area": 1024,
+    "max_fill_ratio": 0.6
+  },
+  "inspection_profile": "detail-contrast",
+  "note": "target candidate presence is a display status, not a correctly located detection or accuracy estimate",
   "independent_test_claimed": false,
-  "note": "actual model candidates, not ground-truth overlays; upstream industrial model training overlap is unknown"
+  "web_browser_review": {
+    "performed": true,
+    "all_groups": 96,
+    "scratch_filter": 24,
+    "scratch_and_empty_filter": 0,
+    "empty_filter": 6,
+    "filename_filter": 1,
+    "first_original_loaded": true,
+    "first_result_loaded": true
+  },
+  "local_unit_and_api_contract_tests": 54
 }

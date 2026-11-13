@@ -6,6 +6,8 @@
 
 另有**裂缝、剥落、锈蚀、工业划痕**四组照片对比导出入口：前三组使用本项目桥梁模型，划痕使用注明来源的独立工业 ONNX 预训练模型。[来源与使用边界](docs/INDUSTRIAL_GALLERY.md)。
 
+对比输出已升级为带明确状态的结果卡：没有检出时直接显示“未检出，需复核”；出现其他类别时显示“目标类别未检出”。新增有推理次数上限的多尺度方案、经过验证的专用裂缝分割辅助，以及可按漏检状态筛选的对比页。[优化实测与限制](docs/INSPECTION_OPTIMIZATION.md)。
+
 > 研究状态：v0.1 工程与预实验。完整实验数据见 `artifacts/experiments/pilot_results.json`（运行预实验后生成）。预实验不等于论文最终结果，也不构成结构安全鉴定。
 
 <!-- experiment-status:start -->
@@ -133,6 +135,19 @@ python main.py compare --classes crack --tile-size 768 --output path/to/裂缝�
 python scripts/download_industrial.py
 python main.py gallery --output path/to/四类对比
 ```
+
+检测服务启动后，可访问 **http://127.0.0.1:8765/comparison/** 查看已导出的图片，浏览器首页也有对比入口。
+
+验证并启用可选的增强推理（需要先有本项目训练权重与固定验证集）：
+
+```powershell
+python scripts/compare_inference_profiles.py
+python scripts/download_crack.py
+python scripts/evaluate_crack_auxiliary.py
+python main.py gallery --profile auto --crack-mode auto --output path/to/优化对比
+```
+
+`auto` 仅复用与当前模型和数据清单哈希一致的本地验证结果；未验证时回退基础方案。裂缝辅助使用上游单个 ResNet34 ONNX 图，首次下载归档约 603 MB，实际保留的图约 98 MB；不是上游六模型集成。可以用 `--crack-mode off` 关闭。增强推理提高本轮召回与 F1，同时增加误检和耗时，不能把这些验证集调参结果当作独立测试准确率。
 
 工业划痕通过此 `gallery` 入口处理。图片按源标注分组，输出框来自各自模型，不把源标注框当作预测框。
 

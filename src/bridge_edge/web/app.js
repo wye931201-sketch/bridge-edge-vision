@@ -9,6 +9,7 @@ function chooseFile(file) {
   if (!/^image\/(jpeg|png|webp)$/.test(file.type)) { error("请选择 JPG、PNG 或 WEBP 图片。"); return; }
   if (file.size > 25 * 1024 * 1024) { error("图片超过 25 MiB，请先缩小图片。"); return; }
   selectedFile = file;
+  delete $("preview").dataset.sourceWidth; delete $("preview").dataset.sourceHeight;
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = URL.createObjectURL(file); $("preview").src = previewUrl;
   $("filename").textContent = file.name; $("image-label").textContent = "原始图片";
@@ -18,7 +19,11 @@ function chooseFile(file) {
 }
 $("file").addEventListener("change", (event) => chooseFile(event.target.files[0]));
 $("replace").addEventListener("click", () => $("file").click());
-$("preview").addEventListener("load", () => { $("dimensions").textContent = `${$("preview").naturalWidth} × ${$("preview").naturalHeight} px · 本机处理`; });
+$("preview").addEventListener("load", () => {
+  const width = $("preview").dataset.sourceWidth || $("preview").naturalWidth;
+  const height = $("preview").dataset.sourceHeight || $("preview").naturalHeight;
+  $("dimensions").textContent = `原图 ${width} × ${height} px · 本机处理`;
+});
 for (const eventName of ["dragenter", "dragover"]) $("dropzone").addEventListener(eventName, (event) => { event.preventDefault(); $("dropzone").classList.add("dragover"); });
 for (const eventName of ["dragleave", "drop"]) $("dropzone").addEventListener(eventName, (event) => { event.preventDefault(); $("dropzone").classList.remove("dragover"); });
 $("dropzone").addEventListener("drop", (event) => chooseFile(event.dataTransfer.files[0]));
@@ -31,6 +36,7 @@ async function jsonRequest(url, options) {
   return value;
 }
 function showResult(result) {
+  $("preview").dataset.sourceWidth = result.image_size.width; $("preview").dataset.sourceHeight = result.image_size.height;
   $("preview").src = result.annotated_url;
   $("image-wrap").classList.remove("hidden"); $("dropzone").classList.add("hidden");
   $("image-label").textContent = "模型检测结果"; $("filename").textContent = result.source_filename;

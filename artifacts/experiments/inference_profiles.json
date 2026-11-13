@@ -1,0 +1,189 @@
+{
+  "created_utc": "2026-11-13T04:12:52.622572+00:00",
+  "passed": true,
+  "weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+  "dataset_manifest_sha256": "baaf5702c63e6576c811730fc338f3d24e72675fe34f60ad3d6eadc3dd4c6b07",
+  "confidence": 0.15,
+  "profiles": [
+    {
+      "images": 160,
+      "images_without_candidates": 61,
+      "iou_threshold": 0.5,
+      "micro": {
+        "true_positives": 65,
+        "false_positives": 340,
+        "false_negatives": 658,
+        "precision": 0.16049382716049382,
+        "recall": 0.08990318118948824,
+        "f1": 0.11524822695035461
+      },
+      "per_class": {
+        "crack": {
+          "true_positives": 2,
+          "false_positives": 13,
+          "false_negatives": 76,
+          "precision": 0.13333333333333333,
+          "recall": 0.02564102564102564,
+          "f1": 0.043010752688172046
+        },
+        "spalling": {
+          "true_positives": 18,
+          "false_positives": 135,
+          "false_negatives": 258,
+          "precision": 0.11764705882352941,
+          "recall": 0.06521739130434782,
+          "f1": 0.08391608391608392
+        },
+        "exposed_rebar": {
+          "true_positives": 0,
+          "false_positives": 1,
+          "false_negatives": 45,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "rust": {
+          "true_positives": 45,
+          "false_positives": 190,
+          "false_negatives": 263,
+          "precision": 0.19148936170212766,
+          "recall": 0.1461038961038961,
+          "f1": 0.16574585635359115
+        },
+        "rockpocket": {
+          "true_positives": 0,
+          "false_positives": 1,
+          "false_negatives": 16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "scope": "fixed-threshold validation precision/recall/F1, not mAP or an independent test score",
+      "profile": "legacy",
+      "latency_ms_p50": 74.444,
+      "mean_inference_passes": 11.86875
+    },
+    {
+      "images": 160,
+      "images_without_candidates": 15,
+      "iou_threshold": 0.5,
+      "micro": {
+        "true_positives": 134,
+        "false_positives": 1003,
+        "false_negatives": 589,
+        "precision": 0.11785400175901495,
+        "recall": 0.18533886583679116,
+        "f1": 0.14408602150537633
+      },
+      "per_class": {
+        "crack": {
+          "true_positives": 4,
+          "false_positives": 45,
+          "false_negatives": 74,
+          "precision": 0.08163265306122448,
+          "recall": 0.05128205128205128,
+          "f1": 0.06299212598425197
+        },
+        "spalling": {
+          "true_positives": 41,
+          "false_positives": 378,
+          "false_negatives": 235,
+          "precision": 0.09785202863961814,
+          "recall": 0.14855072463768115,
+          "f1": 0.11798561151079137
+        },
+        "exposed_rebar": {
+          "true_positives": 2,
+          "false_positives": 3,
+          "false_negatives": 43,
+          "precision": 0.4,
+          "recall": 0.044444444444444446,
+          "f1": 0.08
+        },
+        "rust": {
+          "true_positives": 87,
+          "false_positives": 574,
+          "false_negatives": 221,
+          "precision": 0.13161875945537066,
+          "recall": 0.2824675324675325,
+          "f1": 0.17956656346749225
+        },
+        "rockpocket": {
+          "true_positives": 0,
+          "false_positives": 3,
+          "false_negatives": 16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "scope": "fixed-threshold validation precision/recall/F1, not mAP or an independent test score",
+      "profile": "detail",
+      "latency_ms_p50": 358.64700000000005,
+      "mean_inference_passes": 50.3625
+    },
+    {
+      "images": 160,
+      "images_without_candidates": 15,
+      "iou_threshold": 0.5,
+      "micro": {
+        "true_positives": 137,
+        "false_positives": 1011,
+        "false_negatives": 586,
+        "precision": 0.11933797909407666,
+        "recall": 0.18948824343015214,
+        "f1": 0.1464457509353287
+      },
+      "per_class": {
+        "crack": {
+          "true_positives": 4,
+          "false_positives": 45,
+          "false_negatives": 74,
+          "precision": 0.08163265306122448,
+          "recall": 0.05128205128205128,
+          "f1": 0.06299212598425197
+        },
+        "spalling": {
+          "true_positives": 41,
+          "false_positives": 383,
+          "false_negatives": 235,
+          "precision": 0.09669811320754718,
+          "recall": 0.14855072463768115,
+          "f1": 0.11714285714285715
+        },
+        "exposed_rebar": {
+          "true_positives": 2,
+          "false_positives": 3,
+          "false_negatives": 43,
+          "precision": 0.4,
+          "recall": 0.044444444444444446,
+          "f1": 0.08
+        },
+        "rust": {
+          "true_positives": 90,
+          "false_positives": 577,
+          "false_negatives": 218,
+          "precision": 0.13493253373313344,
+          "recall": 0.2922077922077922,
+          "f1": 0.18461538461538463
+        },
+        "rockpocket": {
+          "true_positives": 0,
+          "false_positives": 3,
+          "false_negatives": 16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "scope": "fixed-threshold validation precision/recall/F1, not mAP or an independent test score",
+      "profile": "detail-contrast",
+      "latency_ms_p50": 385.196,
+      "mean_inference_passes": 51.3625
+    }
+  ],
+  "selected_profile": "detail-contrast",
+  "selection_metric": "micro F1 on the fixed validation subset",
+  "independent_test_evaluated": false
+}

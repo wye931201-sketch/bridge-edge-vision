@@ -9,7 +9,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 
-from .paths import location
+from .paths import location, workspace
 from .runtime.engine import Detector, available_models, decode_image, latest_weights, save_prediction
 from .store import get_prediction, list_predictions
 from .taxonomy import class_metadata
@@ -25,6 +25,40 @@ _inference_lock = Lock()
 @app.get("/")
 def index():
     return FileResponse(WEB / "index.html")
+
+
+def comparison_root():
+    return workspace() / "对比"
+
+
+@app.get("/comparison/")
+def comparison_page():
+    path = comparison_root() / "打开对比.html"
+    if not path.is_file():
+        raise HTTPException(404, "尚未生成对比图片，请先运行 gallery")
+    return FileResponse(path, media_type="text/html")
+
+
+@app.get("/comparison/{asset}")
+def comparison_asset(asset: str):
+    if asset not in {"gallery.css", "gallery.js"}:
+        raise HTTPException(404)
+    path = comparison_root() / asset
+    if not path.is_file():
+        raise HTTPException(404)
+    return FileResponse(path)
+
+
+@app.get("/comparison/{number}/{filename}")
+def comparison_image(number: str, filename: str):
+    allowed = {"识别结果.jpg", "原始图片.jpg", "原始图片.jpeg", "原始图片.png", "原始图片.webp"}
+    if not re.fullmatch(r"[1-9][0-9]{0,5}", number) or filename not in allowed:
+        raise HTTPException(404)
+    root = comparison_root().resolve()
+    path = (root / number / filename).resolve()
+    if not path.is_relative_to(root) or not path.is_file():
+        raise HTTPException(404)
+    return FileResponse(path)
 
 
 @lru_cache(maxsize=1)

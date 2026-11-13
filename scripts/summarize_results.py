@@ -68,6 +68,7 @@ def main():
         latency = item["latency_ms"]
         lines.append(f"| {item['backend']} / {item['hardware']} | {latency['p50']:.2f} | {latency['p95']:.2f} | {latency['mean']:.2f} |")
     lines += ["", "测速包含预处理、推理和 NMS，排除图片解码、模型加载、标注保存与 HTTP/相机采集；初始化后 5 次预热、30 次计时、batch 1、FP32。此处没有 Jetson 或 TensorRT 实测。", "",
+              "此表是原始单模型测速，不包含后续多尺度与裂缝辅助。[增强推理的固定验证集 F1 与限制](INSPECTION_OPTIMIZATION.md)单独记录，不替代本卡训练 mAP。", "",
               "验证证据：[HTTP、切片、视频采样与后端一致性](../artifacts/experiments/acceptance.json)、[PyTorch 离线进程](../artifacts/experiments/offline-pytorch.json)、[ONNX 离线进程](../artifacts/experiments/offline-onnx.json)、[无 PyTorch 的安装包推理](../artifacts/experiments/edge-wheel-onnx.json)。", "",
               "## 使用边界", "", "五类图像可见病害候选；不输出病害深度、毫米尺寸、结构承载力或安全等级。",
               "当前检测精度较低，本轮用于建立可复核的工程基线；需要扩充训练与独立数据验证后再评价实用效果。",

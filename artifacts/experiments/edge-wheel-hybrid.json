@@ -1,0 +1,43 @@
+{
+  "created_utc": "2026-11-13T04:54:28.444162+00:00",
+  "passed": true,
+  "installed_wheel_outside_source_checkout": true,
+  "packaged_configs_and_gallery_assets_present": true,
+  "pytorch_installed": false,
+  "outbound_sockets_denied": true,
+  "socket_connections_attempted": 0,
+  "weights_sha256": "1fff32ee32086d1b726745533d736cc8dc55d9bad7609e7c22ce93a147076ae1",
+  "auxiliary_weights_sha256": "1cdb51a68a16b8073cd5f8da9a035ff25992f013ca6f66213d72076b6ed15911",
+  "source_sha256": "6099fb928cd2c81c1f4ec1fe7941d85270474e1640b5806e3458d881bc0466b7",
+  "inspection_profile": "detail-contrast+crack-segmentation",
+  "finding_count": 3,
+  "crack_candidate_count": 2,
+  "rendering": {
+    "status": "detected",
+    "status_text": "检出候选 · 请复核",
+    "finding_count": 3,
+    "expected_label": "crack",
+    "target_detected": true,
+    "detected_labels": [
+      "crack",
+      "rust"
+    ],
+    "source_size": [
+      1920,
+      1440
+    ],
+    "rendered_size": [
+      1920,
+      1680
+    ],
+    "display_scale": 1.0,
+    "photo_origin": [
+      0,
+      240
+    ],
+    "header_height": 240,
+    "annotation_source": "actual model predictions only",
+    "predicted_mask_native_pixels": 3540
+  },
+  "scope": "cold installed-wheel process, real local ONNX detector and segmentation graph; smoke check, not an accuracy estimate"
+}

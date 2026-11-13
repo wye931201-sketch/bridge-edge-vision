@@ -1,7 +1,6 @@
 """One result schema for PyTorch and ONNX Runtime, with no network dependency."""
 from dataclasses import asdict, dataclass
 import ast
-import hashlib
 import io
 from pathlib import Path
 import time
@@ -194,7 +193,14 @@ def save_prediction(image, result, original_name="image"):
     folder = location("predictions") / run_id
     folder.mkdir()
     result = {**result, "id": run_id, "source_filename": Path(original_name).name}
-    annotate(image, result["detections"]).save(folder / "annotated.jpg", quality=92)
+    from ..presentation import render_result_card
+    card, rendering = render_result_card(image, result["detections"], model=result.get("model", ""),
+                                        confidence=result.get("confidence_threshold", .25),
+                                        profile=result.get("inspection_profile_name", "standard"),
+                                        crack_mask=result.get("_native_crack_mask"))
+    card.save(folder / "annotated.jpg", quality=92)
+    result = {key: value for key, value in result.items() if not key.startswith("_")}
+    result["rendering"] = rendering
     write_json(folder / "result.json", result)
     from ..store import record_prediction
     record_prediction(result)

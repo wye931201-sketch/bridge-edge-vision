@@ -1,5 +1,5 @@
 """Export numbered original/prediction image pairs for direct visual review."""
-from html import escape
+import json
 from pathlib import Path
 import shutil
 import tempfile
@@ -7,7 +7,9 @@ import tempfile
 from PIL import Image
 
 from .paths import location, workspace
-from .runtime.engine import Detector, annotate, decode_image, latest_weights
+from .presentation import render_result_card, result_state, EXPECTED_LABELS
+from .runtime.engine import Detector, decode_image, latest_weights
+from .runtime.inspection import BridgeInspector
 from .taxonomy import CLASSES, NAMES
 from .utils import read_json, sha256, utc_now, write_json
 
@@ -43,35 +45,26 @@ def _inputs(source, classes):
 
 
 def _gallery(destination, items, confidence, model, classes, tile_size, description=""):
-    cards = []
+    display = []
     for item in items:
-        number = item["number"]
-        cards.append(f'<section id="group-{number}"><h2>第 {number} 组 · {escape(item.get("category", ""))} · {escape(item["source_filename"])}</h2>'
-                     f'<p>检出候选：{item["finding_count"]} 个 · 模型：{escape(item.get("model", model))} · 切片：{item.get("tile_size", tile_size) or "无"}</p><div class="pair">'
-                     f'<figure><figcaption>原始图片</figcaption><a href="{number}/{item["original"]}">'
-                     f'<img loading="lazy" src="{number}/{item["original"]}" alt="第{number}组原始图片"></a></figure>'
-                     f'<figure><figcaption>识别结果</figcaption><a href="{number}/识别结果.jpg">'
-                     f'<img loading="lazy" src="{number}/识别结果.jpg" alt="第{number}组模型识别结果"></a></figure></div></section>')
-    document = ('<!doctype html><html lang="zh-CN"><meta charset="utf-8">'
-                '<meta name="viewport" content="width=device-width,initial-scale=1"><title>原始图片与识别结果对比</title>'
-                '<style>body{font:16px system-ui,sans-serif;background:#eef2f5;color:#172b36;margin:24px}'
-                'main{max-width:1500px;margin:auto}section{background:white;padding:20px;margin:22px 0;border-radius:10px}'
-                'h1{font-size:26px}h2{font-size:18px;overflow-wrap:anywhere}.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}'
-                'figure{margin:0}figcaption{font-weight:bold;margin-bottom:8px}img{width:100%;height:auto;display:block}'
-                '@media(max-width:700px){.pair{grid-template-columns:1fr}body{margin:12px}}</style><main>'
-                f'<h1>原始图片与识别结果对比 · {len(items)} 组</h1>'
-                f'<p>模型：{escape(model)}　置信度阈值：{confidence:g}。点击图片可查看原尺寸。</p>'
-                f'<p>来源标注筛选：{escape("、".join(item.chinese for item in CLASSES if item.name in classes) or "全部类别")}；'
-                f'切片尺寸：{tile_size or "不切片"}。来源标注用于选择照片，图片上的框仍由模型实际预测。</p>'
-                f'<p>{escape(description)}</p>'
-                '<p>数字文件夹内各有一张原始图片和一张模型识别结果。默认样本来自固定验证集，按文件名排序，不按检测效果挑选。</p>'
-                '<p>crack：裂缝；spalling：剥落；exposed_rebar：露筋；rust：锈迹；rockpocket：蜂窝麻面。'
-                'scratches：工业划痕。框是模型候选，尚需复核；未画框表示当前阈值下未检出，不能据此判断没有病害。</p>'
-                + ''.join(cards) + '</main></html>')
+        state = result_state(item["detections"], EXPECTED_LABELS.get(item.get("category")))
+        display.append({"number": item["number"], "category": item.get("category", ""),
+                        "source_filename": item["source_filename"], "original": item["original"],
+                        "finding_count": item["finding_count"], "status": state["status"],
+                        "detected_classes": sorted({d.get("chinese", d["label"]) for d in item["detections"]}),
+                        "model": item.get("model_display_name", item.get("model", model)), "profile": item.get("inspection_profile", "standard")})
+    content = json.dumps({"description": description or f"模型：{model}；阈值：{confidence:g}。按文件名排序的真实预测结果。",
+                          "items": display}, ensure_ascii=False)
+    # Filenames and source metadata are data, never executable HTML.
+    content = content.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    web = Path(__file__).parent / "web"
+    document = (web / "gallery.html").read_text("utf-8").replace("__GALLERY_DATA__", content)
     (destination / "打开对比.html").write_text(document, encoding="utf-8")
+    for filename in ("gallery.css", "gallery.js"):
+        shutil.copyfile(web / filename, destination / filename)
 
 
-def export_comparisons(source=None, output=None, weights=None, device="cpu", confidence=0.15, limit=0, classes=None, tile_size=0):
+def export_comparisons(source=None, output=None, weights=None, device="cpu", confidence=0.15, limit=0, classes=None, tile_size=0, profile=None, crack_mode="auto"):
     if limit < 0 or not 0 <= confidence <= 1 or tile_size < 0:
         raise ValueError("Use a nonnegative limit and a confidence threshold between zero and one")
     classes = list(classes or [])
@@ -89,6 +82,8 @@ def export_comparisons(source=None, output=None, weights=None, device="cpu", con
         if card.is_file() and read_json(card).get("passed") is True:
             selected = selected.with_suffix(".onnx")
     engine = Detector(selected, device=device)
+    inspector = BridgeInspector(engine, profile, crack_mode) if profile else None
+    category = next((item.chinese for item in CLASSES if len(classes) == 1 and item.name == classes[0]), None)
     destination.parent.mkdir(parents=True, exist_ok=True)
     items = []
     # Only this newly created staging directory is eligible for automatic cleanup.
@@ -102,29 +97,36 @@ def export_comparisons(source=None, output=None, weights=None, device="cpu", con
             if expected_hash and original_hash != expected_hash:
                 raise ValueError("Original dataset image changed: " + path.name)
             image = decode_image(path.read_bytes())
-            result = engine.predict(image, confidence=confidence, tile_size=tile_size)
+            result = inspector.predict(image, confidence=confidence, tile_size=tile_size) if inspector else engine.predict(image, confidence=confidence, tile_size=tile_size)
             folder = staging / str(number)
             folder.mkdir()
             original = folder / ("原始图片" + path.suffix.lower())
             annotated = folder / "识别结果.jpg"
             shutil.copyfile(path, original)
-            annotate(image, result["detections"]).save(annotated, quality=95)
+            profile_name = result.get("inspection_profile_name", "standard")
+            card, rendering = render_result_card(image, result["detections"], model=inspector.display_name if inspector else engine.path.name,
+                                                category=category, confidence=confidence, profile=profile_name,
+                                                crack_mask=result.get("_native_crack_mask"))
+            card.save(annotated, quality=95)
             if sha256(original) != original_hash:
                 raise RuntimeError("Original image copy is not byte-identical")
             with Image.open(annotated) as rendered:
-                if rendered.size != (image.shape[1], image.shape[0]):
-                    raise RuntimeError("Annotated image size differs from its original")
+                if list(rendered.size) != rendering["rendered_size"]:
+                    raise RuntimeError("Result card size differs from its rendering record")
                 rendered.verify()
             items.append({"number": number, "source_filename": path.name, "original": original.name,
                           "original_sha256": original_hash, "annotated_sha256": sha256(annotated),
-                          "finding_count": result["finding_count"], "detections": result["detections"]})
+                          "finding_count": result["finding_count"], "detections": result["detections"],
+                          "rendering": rendering, "inspection_profile": profile_name, "category": category or "",
+                          "crack_auxiliary": result.get("crack_auxiliary")})
             print(f"{number}/{len(paths)}: {path.name} -> {result['finding_count']} candidates", flush=True)
         _gallery(staging, items, confidence, engine.path.name, classes, tile_size)
         staging.rename(destination)
     report = {"created_utc": utc_now(), "passed": True, "output": str(destination), "pairs": len(items),
               "model": engine.path.name, "weights_sha256": engine.weights_sha256,
               "backend": engine.backend, "confidence_threshold": confidence,
-              "source_class_filters": classes, "tile_size": tile_size,
+              "source_class_filters": classes, "tile_size": tile_size, "inspection_profile": inspector.profile if inspector else "standard",
+              "root_files": ["打开对比.html", "gallery.css", "gallery.js"],
               "dataset_manifest_sha256": manifest_hash,
               "selection": "fixed validation filenames in order" if source is None else "source filenames in order",
               "originals_byte_identical": True, "items": items}

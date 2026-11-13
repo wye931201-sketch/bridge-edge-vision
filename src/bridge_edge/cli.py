@@ -41,11 +41,15 @@ def _parser():
     comparisons.add_argument("--limit", type=int, default=0, help="0 表示全部，正数表示按文件名取前 N 张")
     comparisons.add_argument("--classes", nargs="+", choices=["crack", "spalling", "exposed_rebar", "rust", "rockpocket"], help="按来源标注筛选固定验证集照片")
     comparisons.add_argument("--tile-size", type=int, default=0, help="高分辨率切片尺寸，例如 768；0 表示不切片")
+    comparisons.add_argument("--profile", choices=["auto", "legacy", "detail", "detail-contrast"], default="auto", help="使用经过验证的方案；legacy 使用 --tile-size")
+    comparisons.add_argument("--crack-mode", choices=["auto", "off"], default="auto")
     gallery = commands.add_parser("gallery", help="导出裂缝、剥落、锈蚀、划痕四组真实照片对比")
     gallery.add_argument("--output")
     gallery.add_argument("--per-category", type=int, default=24)
     gallery.add_argument("--confidence", type=float, default=.15)
     gallery.add_argument("--tile-size", type=int, default=768)
+    gallery.add_argument("--profile", choices=["auto", "legacy", "detail", "detail-contrast"], default="auto")
+    gallery.add_argument("--crack-mode", choices=["auto", "off"], default="auto", help="仅自动启用通过本地验证的裂缝辅助模型")
     for name in ("predict", "video"):
         item = commands.add_parser(name, help="图片 / 文件夹检测" if name == "predict" else "视频 / 摄像头帧采样检测")
         item.add_argument("--source", required=True)
@@ -119,12 +123,12 @@ def main(argv=None):
             result = predict_images(args.source, args.weights, args.device, args.confidence, args.imgsz, args.tile_size)
         elif args.command == "compare":
             from .comparisons import export_comparisons
-            result = export_comparisons(args.source, args.output, args.weights, args.device, args.confidence, args.limit, args.classes, args.tile_size)
+            result = export_comparisons(args.source, args.output, args.weights, args.device, args.confidence, args.limit, args.classes, args.tile_size, args.profile, args.crack_mode)
             print(f"已生成 {result['pairs']} 组图片：{result['output']}\n打开其中的“打开对比.html”可左右对照查看。")
             return 0
         elif args.command == "gallery":
             from .damage_gallery import export_damage_gallery
-            result = export_damage_gallery(args.output, args.per_category, args.confidence, args.tile_size)
+            result = export_damage_gallery(args.output, args.per_category, args.confidence, args.tile_size, args.profile, args.crack_mode)
             print(f"已生成 {result['pairs']} 组四类受损照片对比：{result['output']}\n双击“打开对比.html”可查看。")
             return 0
         elif args.command == "video":

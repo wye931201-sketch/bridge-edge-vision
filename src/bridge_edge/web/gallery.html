@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>受损照片 · 识别结果复核</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">桥观 · 本地对比与复核</p>
+    <h1>原始图片与识别结果</h1>
+    <p>逐组查看原始照片、真实预测框和复核状态。点击图片可放大。</p>
+    <details><summary>查看数据来源、模型及验证范围</summary><p id="description"></p></details>
+    <p class="notice">照片分组来自源标注；检出状态来自模型实际预测。未检出需要复核，不能据此判断没有病害。</p>
+  </header>
+  <div class="summary" id="summary" aria-label="结果概况"></div>
+  <nav class="filters" aria-label="筛选图片">
+    <label>照片类型 <select id="category"><option value="">全部类型</option></select></label>
+    <label>查找 <input id="search" type="search" placeholder="编号、文件名或类别"></label>
+    <div class="status-filters" id="status-filters">
+      <button type="button" data-status="" aria-pressed="true">全部</button>
+      <button type="button" data-status="detected" aria-pressed="false">检出候选</button>
+      <button type="button" data-status="target_missed" aria-pressed="false">目标类未检出</button>
+      <button type="button" data-status="empty" aria-pressed="false">无任何候选</button>
+    </div>
+  </nav>
+  <p id="visible-count" role="status"></p>
+  <div id="cards"></div>
+  <p id="empty-filter" hidden>当前筛选没有图片。可选择“全部”或清空查找条件。</p>
+  <footer>候选框不等于人工确认的病害；类别出现也不等于位置匹配正确。模型效果应查看固定验证集的检测匹配报告。</footer>
+</main>
+<script id="gallery-data" type="application/json">__GALLERY_DATA__</script>
+<script src="gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-11-13T04:47:10.354043+00:00",
+  "passed": true,
+  "empty_and_nonempty_real_http_predictions": true,
+  "result_card_dimensions_verified": true,
+  "persisted_metadata_round_trip": true,
+  "cases": [
+    {
+      "confidence": 1.0,
+      "finding_count": 0,
+      "status": "empty",
+      "result_size": [
+        1920,
+        1680
+      ]
+    },
+    {
+      "confidence": 0.15,
+      "finding_count": 1,
+      "status": "detected",
+      "result_size": [
+        1920,
+        1680
+      ]
+    }
+  ]
+}

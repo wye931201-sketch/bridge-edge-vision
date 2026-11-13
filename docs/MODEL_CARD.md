@@ -23,6 +23,8 @@
 
 验证证据：[HTTP、切片、视频采样与后端一致性](../artifacts/experiments/acceptance.json)、[PyTorch 离线进程](../artifacts/experiments/offline-pytorch.json)、[ONNX 离线进程](../artifacts/experiments/offline-onnx.json)、[无 PyTorch 的安装包推理](../artifacts/experiments/edge-wheel-onnx.json)。
 
+此表是原始单模型测速，不包含后续多尺度与裂缝辅助。[增强推理的固定验证集 F1 与限制](INSPECTION_OPTIMIZATION.md)单独记录，不替代本卡训练 mAP。
+
 ## 使用边界
 
 五类图像可见病害候选；不输出病害深度、毫米尺寸、结构承载力或安全等级。
